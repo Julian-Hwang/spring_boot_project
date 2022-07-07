@@ -108,4 +108,19 @@ public class WebBoardController {
 		
 		return "redirect:/boards/list";
 	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
+	
+	@GetMapping("/accessDenied")
+	public String accessDenied() {
+		return "accessDenied";
+	}
+	
+	@GetMapping("/logout")
+	public String logout() {
+		return "logout";
+	}
 }
