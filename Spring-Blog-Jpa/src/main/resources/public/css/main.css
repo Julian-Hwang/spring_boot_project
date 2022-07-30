@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+/** 헤더 메뉴에 대한 css 값 */
+
+ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow: hidden;
+background-color: black;
+}
+
+li {
+float: left;
+}
+
+li a {
+display: block;
+color: white;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+
+li div{
+display: block;
+color: white;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+
+/** User 테이블에 대한에 대한 css 값 */
+
+#user_table {
+display: table; 
+width: 80%;
+margin: auto;
+}
+
+.user_row {
+display: table-row;
+}
+
+.user_cell {
+display: table-cell; 
+padding: 3px; 
+border-bottom: 1px solid #DDD;
+}
+
+.user_col1 { 
+width: 20%;
+}
+
+.user_col2 {
+width: 20%;
+}
+
+.user_col3 {
+width: 40%;
+}
+
+.user_col4 {
+width: 20%;
+}
+
+/** Post 테이블에 대한에 대한 css 값 */
+
+#post_table {
+display: table; 
+width: 80%;
+margin: auto;
+}
+
+.post_row {
+display: table-row;
+}
+
+.post_cell {
+display: table-cell; 
+padding: 3px; 
+border-bottom: 1px solid #DDD;
+}
+
+.post_col1 { 
+width: 7%;
+text-align: center;
+}
+
+.post_col2 {
+width: 8%;
+text-align: center;
+}
+
+.post_col3 {
+width: 50%;
+}
+
+.post_col4 {
+width: 10%;
+text-align: center;
+}
+
+.post_col5 {
+width: 5%;
+text-align: center;
+}
+
+.post_col6 {
+width: 10%;
+text-align: center;
+}
+
+.disabled {
+color: currentColor;
+cursor: not-allowed;
+opacity: 0.5;
+text-decoration: none;
+}

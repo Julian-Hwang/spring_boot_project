@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>포스트 보기</title>
+<div th:replace="/layout :: header-css"/>
+</head>
+<body>
+	<div th:replace="/layout :: site-header"></div><br><br>
+	<div class="container">
+		<form method="post" th:object="${postForm}">
+			<div class="jumbotron">
+				<h1 class="title" th:text="${post.title}">글 제목</h1>
+				<div class="date">
+					<i>표시</i>
+					<span th:text="${#dates.format(post.createdDate, 'dd-MMM-yyyy')}">02-May2019</span>
+					<span th:if="${post.user}" th:remove="tag">
+						<i>by</i>
+						<span th:text="${post.user.fullname != null ? post.user.fullname : post.user.username}">작성자</span>
+					</span>
+				</div>
+				<h3>Comments:</h3>
+			<div class="card card-body bg-light mb-2" th:each="tag : ${post.tags}">
+			<h3 th:text="${tag.body}">댓글</h3>
+			<div th:text="'Created: ' +  ${#dates.format(tag.createdDate, 'dd-MMM-yyyy')} + ' by '">
+				생성자
+			</div>
+			<div><a th:text="${tag.user.username}">사용자</a>
+			</div>
+			</div>
+			
+			<div class="row">
+			<a th:href="@{'/tags/view/{id}'(id=${post.id})}">
+			<button type="button" th:text="Tag">댓글</button>
+			</a>
+		</div>
+			</form>
+		</div>
+		<div th:replace="/layout :: footer"></div>
+		
+</body>
+</html>

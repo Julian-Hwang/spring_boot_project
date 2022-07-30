@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<div th:replace="/layout :: header-css"/>
+<title>Http 오류</title>
+</head>
+<body>
+	<div th:replace="/layout :: site-header"></div><br><br>
+	<div class="container">
+		<div class="text-center">
+		<div><h2>시스템에 치명적인 오류가 발생 하였습니다. 잠시후 다시 연결해주십시요</h2></div>
+		</div>
+	</div>
+	<div th:replace="/layout :: footer"></div>
+</body>
+</html>

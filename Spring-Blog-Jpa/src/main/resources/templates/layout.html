@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- fragment 에서 사용할 jQuery 와 bootstrap, 그리고 사용자 정의된 css 를 불러옵니다. -->
+<div th:fragment="header-css">
+	<meta charset="UTF-8">
+		<title>Aaa Blog System</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<link href="https://maxcdn.bootstrapcdn.com/fontawesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<!-- 블로그에서 사용할 cascading style sheets 를 불러옵니다. -->
+		<link rel="stylesheet" href="../public/css/main.css" th:href="@{/css/main.css}" />
+	</div>
+</head>
+
+<body>
+	<!-- header 템플릿 입니다. -->
+	<div th:fragment="site-header">
+	<nav id="header">
+			<ul>
+				<li>
+					<a class="navbar-brand" th:href="@{/index}">
+						<img src="../public/icon/logo.png" th:src="@{/icon/logo.png}" width="180px" height="60px"/>
+					</a>
+				</li>
+				<!-- session 에 username 이 존재하면 하위링크를 표시합니다. -->
+				<div th:if="${session.username}">
+					<li><a th:href="@{/users}">사용자 보기</a></li>
+					<li><a th:href="@{/posts/create}">새로운 글</a></li>
+					<li><a th:href="@{/logout}">퇴장</a></li>
+					<li style="float:right">
+						<div th:text="${session.username}"></div>
+					</li>
+				</div>
+				<!-- session 에 username 이 존재하지 않으면 하위 링크를 표시합니다. -->
+				<div th:unless="${session.username}">
+					<li><a th:href="@{/users/register}">등록</a></li>
+					<li><a th:href="@{/users/login}">로그인</a></li>
+					<li style="float:right"><div>로그인안됨</div></li>
+				</div>
+	
+			</ul>
+		</nav>
+	</div>
+	<!-- footer 템플릿 입니다. -->
+	<div th:fragment="footer">
+		<p class="text-center">© 2021 Joseph Hwang 블로그</p>
+	</div>
+	</body>
+</html>

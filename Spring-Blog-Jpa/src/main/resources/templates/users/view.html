@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>사용자 보기</title>
+<div th:replace="/layout :: header-css"/>
+</head>
+<body>
+	<div th:replace="/layout :: site-header"></div><br><br>
+	
+	<div id="user_table">
+		<div class="user_row">
+			<div class="user_cell user_col1">아이디</div>
+			<div class="user_cell user_col2">이메일</div>
+			<div class="user_cell user_col3">사용자 이름</div>
+			<div class="user_cell user_col4">권한</div>
+		</div>
+	
+		<div class="user_row" th:each="user : ${users}">
+			<div class="user_cell user_col1" th:text="${user.username}">사용자 아이디</div>
+			<div class="user_cell user_col2" th:text="${user.email}">사용자 이메일</div>
+			<div class="user_cell user_col3" th:text="${user.fullname}">사용자 이름</div>
+			<div class="user_cell user_col4" th:text="${user.role}">사용자 권한</div>
+		</div>
+	</div>
+	
+	<div th:replace="/layout :: footer"></div>
+</body>
+</html>

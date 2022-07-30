@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>댓글 입력</title>
+<div th:replace="/layout :: header-css"/>
+</head>
+<body>
+	<div th:replace="/layout :: site-header"></div><br><br>
+	<h1>댓글 입력 화면입니다. 댓글을 입력하세요.</h1>
+	<div class="container">
+		<form autocomplete="off" method="post" th:action="@{/tags/create}" th:object="${tag}">
+			<div class="form-group">
+				<textarea name="body" rows="20" width="200" class="form-control input-lg" placeholder="Body" th:value="*{body}">[[*{body}]]</textarea>
+				<input type="hidden" th:field="*{post}"/>
+			<input type="hidden" th:field="*{user}"/>
+				<div>
+					<input type="submit" value="수정" />
+					<a href="index.html" th:href="@{/posts}">취소</a>
+				</div>
+			</div>
+			<div class="form-group alert alert-danger" th:if="${#fields.hasErrors('body')}">
+				<b th:text="${#fields.detailedErrors('body')}"></b>
+			</div>
+		</form>
+	</div>
+	<div th:replace="/layout :: footer"></div>
+</body>
+</html>

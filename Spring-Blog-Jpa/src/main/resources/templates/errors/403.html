@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<div th:replace="/layout :: header-css"/>
+<title>Http 403 오류</title>
+</head>
+<body>
+	<div th:replace="/layout :: site-header"></div><br><br>
+	<div class="container">
+		<div class="text-center">
+		<div><h2> HTTP 403 오류. 본 페이지에 대한 권한이 없습니다.</h2></div>
+		</div>
+	</div>
+	<div th:replace="/layout :: footer"></div>
+</body>
+</html>

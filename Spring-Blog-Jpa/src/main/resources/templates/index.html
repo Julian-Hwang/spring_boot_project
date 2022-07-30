@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<div th:replace="/layout :: header-css"/>
+<title>블로그 전체글 내용보기</title>
+</head>
+<body>
+	<div th:replace="/layout :: site-header"></div><br><br>
+	<div id="post_table">
+		<div class="post_row">
+			<div class="post_cell post_col1">포스트 아이디</div>
+			<div class="post_cell post_col2">포스트 이름</div>
+			<div class="post_cell post_col3">포스트 내용</div>
+			<div class="post_cell post_col4">날짜</div>
+			<div class="post_cell post_col5">작성자</div>
+			<div class="post_cell post_col6">포스트 처리</div>
+		</div>
+		<div class="post_row" th:each="post : ${posts}">
+			<div class="post_cell post_col1" th:text="${post.id}">포스트 아이디</div>
+			<div class="post_cell post_col2" th:text="${post.title}">제목</div>
+			<div class="post_cell post_col3" th:text="${post.body}">내용</div>
+			<div class="post_cell post_col4" th:text="${post.createdDate}">작성날짜</div>
+			<div class="post_cell post_col5" th:text="${post.user.username}">작성자 아이디</div>
+			<div class="post_cell post_col6">
+				<div th:if="${session.username}">
+					<a href="posts/view.html" th:href="@{posts/view/__${post.id}__}">
+					<img src="../public/icon/view.png" th:src="@{/icon/view.png}" width="25px" height="25px"/></a>
+					<a href="posts/view.html" th:href="@{posts/edit/__${post.id}__}">
+					<img src="../public/icon/edit.png" th:src="@{/icon/edit.png}" width="25px" height="25px"/></a>
+					<a href="posts/view.html" th:href="@{posts/delete/__${post.id}__}">
+					<img src="../public/icon/delete.png" th:src="@{/icon/delete.png}" width="25ps" height="25px"/></a>
+				</div>
+				<div th:unless="${session.username}">
+					<a class="disabled" href="#">
+					<img src="../public/icon/view.png" th:src="@{/icon/view.png}" width="25px" height="25px"/></a>
+					<a class="disabled" href="#">
+					<img src="../public/icon/edit.png" th:src="@{/icon/edit.png}" width="25px" height="25px"/></a>
+					<a class="disabled" href="#">
+					<img src="../public/icon/delete.png" th:src="@{/icon/delete.png}" width="25ps" height="25px"/></a>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div th:replace="/layout :: footer"></div>		
+</body>
+</html>
