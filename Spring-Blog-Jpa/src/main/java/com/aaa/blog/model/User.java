@@ -10,6 +10,8 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,10 +24,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name="BlogUser")
+@JsonPropertyOrder({"id","username","email","fullname","role"})
 public class User {
 	
 	@Id
 	@Column(name="USER_ID", nullable = false, unique = true)
+	@JsonProperty("User_ID")
 	private Long id;
 	
 	@Column(unique = true, nullable = false)
