@@ -23,7 +23,8 @@
 			<div class="post_cell post_col4" th:text="${post.createdDate}">작성날짜</div>
 			<div class="post_cell post_col5" th:text="${post.user.username}">작성자 아이디</div>
 			<div class="post_cell post_col6">
-				<div th:if="${session.username}">
+				<!--  <div th:if="${session.username}">-->
+				<div sec:authorize="isAuthenticated()">
 					<a href="posts/view.html" th:href="@{posts/view/__${post.id}__}">
 					<img src="../public/icon/view.png" th:src="@{/icon/view.png}" width="25px" height="25px"/></a>
 					<a href="posts/view.html" th:href="@{posts/edit/__${post.id}__}">
@@ -31,7 +32,8 @@
 					<a href="posts/view.html" th:href="@{posts/delete/__${post.id}__}">
 					<img src="../public/icon/delete.png" th:src="@{/icon/delete.png}" width="25ps" height="25px"/></a>
 				</div>
-				<div th:unless="${session.username}">
+				<!-- <div th:unless="${session.username}"> -->
+				<div sec:authorize="!isAuthenticated()">
 					<a class="disabled" href="#">
 					<img src="../public/icon/view.png" th:src="@{/icon/view.png}" width="25px" height="25px"/></a>
 					<a class="disabled" href="#">

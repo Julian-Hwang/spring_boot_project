@@ -10,7 +10,7 @@ INSERT INTO blog_user (user_id, username, password, email, fullname, role)
 
 
 -- Users 테이블에 값을 갱신합니다. 암호는 'password' 문자열을 암호한 값으로 변경합니다.
--- UPDATE blog_user SET password = '$2a$10$9JNxu8ukTU6z12FBJMbAJuCUW4PlxgDauqi3XWReZeW0/SUYxtp9e';
+UPDATE blog_user SET password = '$2a$10$9JNxu8ukTU6z12FBJMbAJuCUW4PlxgDauqi3XWReZeW0/SUYxtp9e';
  
  
 -- Posts값을 입력합니다.

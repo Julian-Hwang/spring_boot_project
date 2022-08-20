@@ -1,5 +1,6 @@
 package com.aaa.blog.controller;
 
+import java.security.Principal;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Optional;
@@ -34,19 +35,21 @@ public class TagController {
 	private TagService tagService;
 	
 	@RequestMapping(value="/tags/create", method=RequestMethod.POST)
-	public String newTag(@Valid Tag tag, BindingResult bindingResult, HttpSession session) {
+	//public String newTag(@Valid Tag tag, BindingResult bindingResult, HttpSession session) {
+	public String newTag(@Valid Tag tag, BindingResult bindingResult, Principal principal) {
 		if(bindingResult.hasErrors()) {
 			bindingResult.rejectValue("body", "tag.body", "댓글 생성시 오류 발생.");
 			return "/tags/create";
 		}
 		
-		if(session.getAttribute("username")==null) {
+		/*if(session.getAttribute("username")==null) {
 			bindingResult.rejectValue("body", "tag.username", "로그인 하세요.");
 			return "/error";
-		}
+		}*/
 		
 		tag.setId(tagService.getTags().stream().map(Tag::getId).max(Comparator.naturalOrder()).orElse(Long.MIN_VALUE)+1);
-		tag.setUser(userService.findByUsername((String)session.getAttribute("username")).get());
+		//tag.setUser(userService.findByUsername((String)session.getAttribute("username")).get());
+		tag.setUser(userService.findByUsername(principal.getName()).get());
 		tag.setCreatedDate(new Date());
 		tagService.save(tag);
 		

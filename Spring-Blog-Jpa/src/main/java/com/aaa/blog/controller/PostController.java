@@ -2,6 +2,7 @@ package com.aaa.blog.controller;
 
 
 
+import java.security.Principal;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +43,8 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="/posts/create", method=RequestMethod.POST)
-	public String newPost(@Valid PostForm postForm, BindingResult bindingResult, HttpSession session) {
+	//public String newPost(@Valid PostForm postForm, BindingResult bindingResult, HttpSession session) {
+	public String newPost(@Valid PostForm postForm, BindingResult bindingResult, Principal principal) {
 		if(bindingResult.hasErrors()) {
 			bindingResult.rejectValue("body", "create.body", "포스트 생성 시 오류가 발생했습니다.");
 			return "/posts/create";
@@ -54,7 +56,8 @@ public class PostController {
 		post.setBody(postForm.getBody());
 		post.setCreatedDate(new Date());
 		
-		post.setUser(userService.findByUsername((String)session.getAttribute("username")).get());
+		//post.setUser(userService.findByUsername((String)session.getAttribute("username")).get());
+		post.setUser(userService.findByUsername(principal.getName()).get());
 		
 		Post p = postService.create(post);
 		

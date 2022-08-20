@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extrasspringsecurity5">
 <head>
 <!-- fragment 에서 사용할 jQuery 와 bootstrap, 그리고 사용자 정의된 css 를 불러옵니다. -->
 <div th:fragment="header-css">
@@ -24,16 +24,21 @@
 					</a>
 				</li>
 				<!-- session 에 username 이 존재하면 하위링크를 표시합니다. -->
-				<div th:if="${session.username}">
+				<!--  <div th:if="${session.username}">-->
+				<div sec:authorize="isAuthenticated()">
 					<li><a th:href="@{/users}">사용자 보기</a></li>
 					<li><a th:href="@{/posts/create}">새로운 글</a></li>
 					<li><a th:href="@{/logout}">퇴장</a></li>
-					<li style="float:right">
+					<!--<li style="float:right">
 						<div th:text="${session.username}"></div>
+					</li>-->
+					<li style="float:right">
+						<div th:text="${#authentication.getName()}"></div>
 					</li>
 				</div>
 				<!-- session 에 username 이 존재하지 않으면 하위 링크를 표시합니다. -->
-				<div th:unless="${session.username}">
+				<!--  <div th:unless="${session.username}">-->
+				<div sec:authorize="!isAuthenticated()">
 					<li><a th:href="@{/users/register}">등록</a></li>
 					<li><a th:href="@{/users/login}">로그인</a></li>
 					<li style="float:right"><div>로그인안됨</div></li>

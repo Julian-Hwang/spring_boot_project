@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String index(Model model) {
@@ -57,23 +61,24 @@ public class UserController {
 		
 		Optional<User> optionalUser = this.userService.findByUsername(registerForm.getUsername());
 		if(optionalUser.isPresent()) {
-			bindingResult.rejectValue("username", "register.username", "User가 이미 존재.");	
+			bindingResult.rejectValue("username", "error.user", "User가 이미 존재.");	
 		}
 		
-		Optional<User> optionalEmail = this.userService.findByEmail(registerForm.getEmail());
+		/*Optional<User> optionalEmail = this.userService.findByEmail(registerForm.getEmail());
 		if(optionalEmail.isPresent()) {
 			bindingResult.rejectValue("email", "register.email", "이메일이 이미 존재.");	
-		}
+		}*/
 		
 		if(!bindingResult.hasErrors()) {
 			User user = new User();
 			user.setUsername(registerForm.getUsername());
-			user.setPassword(registerForm.getPassword());
+			//user.setPassword(registerForm.getPassword());
+			user.setPassword(passwordEncoder.encode(registerForm.getPassword()));
 			user.setEmail(registerForm.getEmail());
 			user.setFullname(registerForm.getFullname());
 			user.setRole(UserRole.USER);
 			this.userService.register(user);
-			return "redirect:/index";
+			return "redirect:/home";
 		}
 		return "/users/register";
 	}
